@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomb Blitz - Two Players</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="game-container">
+        <!-- Player 1 controls on the left -->
+        <div id="player1-controls" class="player-controls">
+            <div class="player-info" id="player1-info">
+                <p id="player1-name">Player 1 (Black)</p>
+                <p id="player1-score" class="score">Score: 0</p>
+            </div>
+            <button id="roll-dice-p1" class="roll-dice-button">Roll Dice</button>
+            <p id="dice-number-p1" class="dice-number">Roll: 0</p>
+        </div>
+
+        <!-- Game board in the center -->
+        <div id="board"></div>
+
+        <!-- Player 2 controls on the right -->
+        <div id="player2-controls" class="player-controls">
+            <div class="player-info" id="player2-info">
+                <p id="player2-name">Player 2 (Blue)</p>
+                <p id="player2-score" class="score">Score: 0</p>
+            </div>
+            <button id="roll-dice-p2" class="roll-dice-button">Roll Dice</button>
+            <p id="dice-number-p2" class="dice-number">Roll: 0</p>
+        </div>
+    </div>
+
+    <!-- Action buttons (Undo, Redo, Refresh) at the bottom -->
+    <div id="action-buttons">
+        <button id="undo" class="action-button">Undo</button>
+        <button id="redo" class="action-button">Redo</button>
+        <button id="refresh" class="action-button">Refresh</button>
+    </div>
+
+    <!-- Message display area -->
+    <div id="message-box"></div>
+
+
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bomb Blitz - Player Setup</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-image: url('background.jpg'); /* Ensure you have a background image named 'background.jpg' */
+            background-size: cover;
+            background-position: center;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .dashboard-container {
+            background: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .input-group input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            font-size: 1em;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .input-group input:focus {
+            border-color: #007BFF;
+        }
+
+        .start-btn, .how-to-play-btn {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1.2em;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin: 10px;
+        }
+
+        .start-btn:hover, .how-to-play-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #ff4d4d;
+            margin-top: 10px;
+        }
+
+        /* Modal styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            position: relative;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-body {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard-container">
+        <h1>Bomb Blitz</h1>
+        <form id="playerForm">
+            <div class="input-group">
+                <label for="player1">Player 1 Name:</label>
+                <input type="text" id="player1" required>
+            </div>
+            <div class="input-group">
+                <label for="player2">Player 2 Name:</label>
+                <input type="text" id="player2" required>
+            </div>
+            <button type="submit" class="start-btn">Start Game</button>
+            <button type="button" class="how-to-play-btn" id="howToPlayBtn">How to Play</button>
+            <div id="error-message" class="error"></div>
+        </form>
+    </div>
+
+    <!-- The Modal -->
+    <div id="howToPlayModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>How to Play Bomb Blitz</h2>
+            <div class="modal-body">
+                <ol>
+                    <li>Each player takes turns rolling a die.</li>
+                    <li>Move your token forward the number of squares shown on the die.</li>
+                    <li>If you land on a bomb, you must go back to the first square (square 1).</li>
+                    <li>If you land on a green arrow, move 5 squares forward.</li>
+                    <li>If you land on a red arrow, move 5 squares backward.</li>
+                    <li>The first player to reach square 100 wins the game!</li>
+                </ol>
+                
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('playerForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+    
+            const player1 = document.getElementById('player1').value.trim();
+            const player2 = document.getElementById('player2').value.trim();
+            const errorMessage = document.getElementById('error-message');
+    
+            if (!player1 || !player2) {
+                errorMessage.textContent = 'Please enter names for both players.';
+                return;
+            }
+    
+            localStorage.setItem('player1', player1);
+            localStorage.setItem('player2', player2);
+    
+            window.location.href = 'index.html';
+        });
+
+        // Modal handling
+        var modal = document.getElementById('howToPlayModal');
+        var btn = document.getElementById('howToPlayBtn');
+        var span = document.getElementsByClassName('close')[0];
+
+        btn.onclick = function() {
+            modal.style.display = 'block';
+        }
+
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+    </script>
+</body>
+</html>
